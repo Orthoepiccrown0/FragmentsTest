@@ -5,7 +5,10 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -14,8 +17,9 @@ import java.util.UUID;
 
 public class CrimeLab {
 
-    public static CrimeLab sCrimeLab;
-    HashMap crimes;
+    private static CrimeLab sCrimeLab;
+    private HashMap crimes;
+
     public static  CrimeLab get(Context context){
         if(sCrimeLab==null){
             sCrimeLab = new CrimeLab(context);
@@ -25,7 +29,7 @@ public class CrimeLab {
 
     private CrimeLab(Context context){
         crimes = new HashMap();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10000; i++) {
             UUID uuid = UUID.randomUUID();
             if(i%2==0) crimes.put(uuid,new Crime(uuid,"Crime#"+i, false,new Date()));
             else crimes.put(uuid,new Crime(uuid,"Crime#"+i, true,new Date()));
@@ -38,6 +42,18 @@ public class CrimeLab {
 
     public Crime getCrime(UUID uuid){
         return (Crime) crimes.get(uuid);
+    }
+
+    public Crime getCrimeStupidV(UUID uuid){
+        Set set = crimes.entrySet();
+        Iterator i = set.iterator();
+        Crime crime = null;
+        while(i.hasNext()) {
+            Map.Entry me = (Map.Entry) i.next();
+            crime = ((Crime)me.getValue());
+            if(crime.getUuid().equals(uuid)) return crime;
+        }
+        return crime;
     }
 
 //    HashMap hm = new HashMap();

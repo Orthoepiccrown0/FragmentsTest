@@ -14,7 +14,4 @@ public class MainHolder extends MainActivityHolder {
         return new Firstfragment();
     }
 
-
-
-
 }
