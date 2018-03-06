@@ -12,11 +12,13 @@ import java.util.UUID;
 public class Crime implements Comparable {
     UUID uuid;
     String mDescription;
+    String mTitle;
     boolean mSolved;
     Date date;
 
-    public Crime(UUID uuid, String mDescription, boolean mSolved, Date date) {
+    public Crime(UUID uuid, String mDescription,String mTitle , boolean mSolved, Date date) {
         this.uuid = uuid;
+        this.mTitle = mTitle;
         this.mDescription = mDescription;
         this.mSolved = mSolved;
         this.date = date;
