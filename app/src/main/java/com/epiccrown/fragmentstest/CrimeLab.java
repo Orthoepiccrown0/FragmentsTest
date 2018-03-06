@@ -31,8 +31,8 @@ public class CrimeLab {
         crimes = new HashMap();
         for (int i = 0; i < 10000; i++) {
             UUID uuid = UUID.randomUUID();
-            if(i%2==0) crimes.put(uuid,new Crime(uuid,"Crime#"+i, false,new Date()));
-            else crimes.put(uuid,new Crime(uuid,"Crime#"+i, true,new Date()));
+            if(i%2==0) crimes.put(uuid,new Crime(uuid,"Crime#"+i, "Title example", false,new Date()));
+            else crimes.put(uuid,new Crime(uuid,"Crime#"+i, "Title example", true,new Date()));
         }
     }
 
