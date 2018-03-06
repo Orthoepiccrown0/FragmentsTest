@@ -56,11 +56,14 @@ public class CrimeListAdapter extends RecyclerView.Adapter<CrimeListAdapter.MyVi
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
+        SimpleDateFormat formatter = new SimpleDateFormat("EEE d MMM yyyy", currentLocale);
+        String result = formatter.format(crime_item.getDate());
+        
         crime_item = crimes_array.get(position);
         holder.title.setText(crime_item.getmDescription());
         holder.description.setText(crime_item.getUuid().toString());
         holder.solved.setChecked(crime_item.ismSolved());
-        holder.date.setText(crime_item.getDate().toString());
+        holder.date.setText(result);
     }
 
     @Override
