@@ -107,7 +107,7 @@ public class CrimeListAdapter extends RecyclerView.Adapter<CrimeListAdapter.MyVi
             fm.beginTransaction()
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .replace(R.id.main_container, fragment)
-
+                    .addToBackStack(null)
                     .commit();
         }
     }
