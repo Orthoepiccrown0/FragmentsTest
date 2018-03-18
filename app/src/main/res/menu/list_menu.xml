@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/details_menu"
+        android:checkable="true"
+        android:title="Crime count"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/hide_details_menu"
+        android:checkable="false"
+        android:title="Hide subtitle" />
+    <item
+        android:id="@+id/refresh_item_menu"
+        android:icon="@drawable/refresh"
+        android:title="Refresh"
+        app:showAsAction="ifRoom" />
+</menu>

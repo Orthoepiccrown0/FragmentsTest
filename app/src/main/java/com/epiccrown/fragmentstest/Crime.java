@@ -2,6 +2,7 @@ package com.epiccrown.fragmentstest;
 
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -9,7 +10,7 @@ import java.util.UUID;
  * Created by Epiccrown on 04.03.2018.
  */
 
-public class Crime implements Comparable {
+public class Crime implements Serializable{
     UUID uuid;
     String mDescription;
     String mTitle;
@@ -32,6 +33,8 @@ public class Crime implements Comparable {
         return mDescription;
     }
 
+    public String getmTitle() { return mTitle; }
+
     public boolean ismSolved() {
         return mSolved;
     }
@@ -40,12 +43,19 @@ public class Crime implements Comparable {
         return date;
     }
 
-    @Override
-    public int compareTo(@NonNull Object o) {
-        Crime crime = (Crime) o;
-        int number = Integer.parseInt(crime.getmDescription().replace("Crime#",""));
-        if(number < Integer.parseInt(mDescription.replace("Crime#",""))) return  -1;
-        if(number > Integer.parseInt(mDescription.replace("Crime#",""))) return  1;
-        return 0;
+    public void setmDescription(String mDescription) {
+        this.mDescription = mDescription;
+    }
+
+    public void setmTitle(String mTitle) {
+        this.mTitle = mTitle;
+    }
+
+    public void setmSolved(boolean mSolved) {
+        this.mSolved = mSolved;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
