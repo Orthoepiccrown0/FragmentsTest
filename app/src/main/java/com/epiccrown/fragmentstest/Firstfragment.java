@@ -152,7 +152,7 @@ public class Firstfragment extends Fragment implements RecyclerTouchHelper.Recyc
 
                 final Crime deletedItem = crime_list.get(viewHolder.getAdapterPosition());
                 final int deletedIndex = viewHolder.getAdapterPosition();
-
+                CrimeLab.get(getActivity()).deleteCrime(deletedItem);
                 // remove the item from recycler view
                 mAdapter.removeItem(viewHolder.getAdapterPosition());
 
@@ -165,6 +165,7 @@ public class Firstfragment extends Fragment implements RecyclerTouchHelper.Recyc
 
                         // undo is selected, restore the deleted item
                         mAdapter.restoreItem(deletedItem, deletedIndex);
+                        CrimeLab.get(getActivity()).addCrime(deletedItem);
                         notifyEmptylst();
                     }
                 });

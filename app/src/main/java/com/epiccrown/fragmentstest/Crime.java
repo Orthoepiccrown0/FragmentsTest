@@ -14,6 +14,7 @@ public class Crime implements Serializable{
     UUID uuid;
     String mDescription;
     String mTitle;
+    String mSuspect;
     boolean mSolved;
     Date date;
 
@@ -58,4 +59,14 @@ public class Crime implements Serializable{
     public void setDate(Date date) {
         this.date = date;
     }
+
+    public String getmSuspect() {
+        return mSuspect;
+    }
+
+    public void setmSuspect(String mSuspect) {
+        this.mSuspect = mSuspect;
+    }
+
+    public String getPhotoFileName(){return "IMG_"+uuid.toString()+".jpg";}
 }

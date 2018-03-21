@@ -72,7 +72,7 @@ public class CrimeListAdapter extends RecyclerView.Adapter<CrimeListAdapter.MyVi
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        crime_item = crimes_array.get(position);
+        final Crime crime_item = crimes_array.get(position);
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm EEE d MMM yyyy");
         String date = formatter.format(crime_item.getDate());
         holder.uuid = crime_item.getUuid();
@@ -89,6 +89,7 @@ public class CrimeListAdapter extends RecyclerView.Adapter<CrimeListAdapter.MyVi
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 crime_item.setmSolved(isChecked);
+                CrimeLab.get(mContext).updateCrime(crime_item);
             }
         });
         holder.date.setText(date);
@@ -96,7 +97,7 @@ public class CrimeListAdapter extends RecyclerView.Adapter<CrimeListAdapter.MyVi
     }
 
 
-    public void replaceFragment(UUID uuid) {
+    private void replaceFragment(UUID uuid) {
         FragmentManager fm = ((FragmentActivity) mContext).getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.main_container);
         Bundle bundle = new Bundle();

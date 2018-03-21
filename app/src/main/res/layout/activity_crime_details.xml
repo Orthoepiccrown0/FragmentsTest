@@ -11,16 +11,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Title"
         android:textAlignment="textStart"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="@+id/title_edit_box"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/title_edit_box"
@@ -31,8 +29,9 @@
         android:ems="10"
         android:hint="Enter a title for a crime"
         android:inputType="textPersonName"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/photoPreview_box"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
@@ -46,7 +45,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_edit_box" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -63,7 +62,7 @@
         <EditText
             android:id="@+id/details_edit_box"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
             android:ems="10"
             android:hint="Details of a crime"
@@ -81,31 +80,74 @@
                 android:id="@+id/date_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/time_button"
                 android:text="Button" />
 
             <Button
                 android:id="@+id/time_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_toStartOf="@+id/date_button"
                 android:text="Button" />
+            <CheckBox
+                android:id="@+id/solved_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/date_button"
+                android:layout_alignBaseline="@+id/date_button"
+                android:text="Solved"
+                />
 
         </RelativeLayout>
 
     </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/solved_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/suspect_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Solved"
+        android:text="Choose suspect"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintStart_toStartOf="@+id/title_edit_box"
+        app:layout_constraintTop_toBottomOf="@+id/photoPreview_box" />
+
+
+    <Button
+        android:id="@+id/send_report_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:text="Send Report"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/camera_icon"
+        app:layout_constraintEnd_toEndOf="@+id/photoPreview_box"
+        app:layout_constraintStart_toStartOf="@+id/photoPreview_box"
+        app:layout_constraintTop_toBottomOf="@+id/photoPreview_box" />
+
+    <ImageView
+        android:id="@+id/photoPreview_box"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

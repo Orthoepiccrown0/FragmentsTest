@@ -56,7 +56,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/desc_item"
                 android:layout_below="@+id/desc_item"
-                android:text="Date" />
+                android:text="Date"
+                android:textColor="@color/colorPrimaryDark" />
 
         </RelativeLayout>
 

@@ -4,7 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -36,7 +38,7 @@ public class CrimeLab {
 
     private CrimeLab(Context context){
         //crimes = new ArrayList<>();
-        mContext = context;
+        mContext = context.getApplicationContext();
         mDatabase = new CrimeDbHelper(mContext).getWritableDatabase();
     }
 
@@ -77,6 +79,7 @@ public class CrimeLab {
         contentValues.put(CrimeDbSchema.CrimeTable.Cols.Description,crime.getmDescription());
         contentValues.put(CrimeDbSchema.CrimeTable.Cols.Date,crime.getDate().getTime());
         contentValues.put(CrimeDbSchema.CrimeTable.Cols.Solved,crime.ismSolved() ? 1 : 0);
+        contentValues.put(CrimeDbSchema.CrimeTable.Cols.Suspect,crime.getmSuspect());
 
         return contentValues;
     }
@@ -109,8 +112,20 @@ public class CrimeLab {
                 new String[] { uuidString });
     }
 
+    public void deleteCrime(Crime crime){
+        String uuidString = crime.getUuid().toString();
+        ContentValues values = getContentValues(crime);
+        mDatabase.delete(CrimeDbSchema.CrimeTable.NAME,
+                CrimeDbSchema.CrimeTable.Cols.UUID + " = ?",
+                new String[] { uuidString });
+    }
 
 
+    public File getPhotoFile(Crime crime){
+        File filesDir = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        if(filesDir==null) return null;
+        return new File(filesDir,crime.getPhotoFileName());
+    }
 
 
 //    HashMap hm = new HashMap();
