@@ -1,5 +1,6 @@
 package com.epiccrown.fragmentstest;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -38,6 +39,11 @@ public class Firstfragment extends Fragment implements RecyclerTouchHelper.Recyc
     private CoordinatorLayout frameLayout;
     private ArrayList<Crime> crime_list;
 
+    public static Callbacks mCallbacks;
+
+    public interface Callbacks{
+        void onCrimeSelected(Crime crime);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -186,6 +192,15 @@ public class Firstfragment extends Fragment implements RecyclerTouchHelper.Recyc
         }
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mCallbacks = (Callbacks)context;
+    }
 
-
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallbacks = null;
+    }
 }

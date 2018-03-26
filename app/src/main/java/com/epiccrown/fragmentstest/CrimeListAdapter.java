@@ -79,7 +79,8 @@ public class CrimeListAdapter extends RecyclerView.Adapter<CrimeListAdapter.MyVi
         holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(holder.uuid);
+                //replaceFragment(holder.uuid);
+                Firstfragment.mCallbacks.onCrimeSelected(crime_item);
             }
         });
         holder.title.setText(crime_item.getmTitle());

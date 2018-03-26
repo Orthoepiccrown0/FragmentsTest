@@ -21,7 +21,7 @@ import java.util.UUID;
  * Created by Epiccrown on 07.03.2018.
  */
 
-public class DetailsPager extends Fragment {
+public class DetailsPager extends Fragment implements CrimeDetailsFragment.Callback{
 
     private ViewPager mViewPager;
     private ArrayList<Crime> mCrimes;
@@ -52,7 +52,7 @@ public class DetailsPager extends Fragment {
             }
         });
 
-        UUID uuid = (UUID)getArguments().get("key");
+        UUID uuid = ((Crime)getArguments().get("key")).getUuid();
         for(int i=0;i<mCrimes.size();i++){
             Crime crime = mCrimes.get(i);
             if(crime.getUuid().equals(uuid)) {mViewPager.setCurrentItem(i); break;}
@@ -65,5 +65,10 @@ public class DetailsPager extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
+    }
+
+    @Override
+    public void onCrimeUpdate(Crime crime) {
+
     }
 }

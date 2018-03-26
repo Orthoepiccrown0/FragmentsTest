@@ -48,6 +48,13 @@ public class CrimeDetailsFragment extends Fragment {
     private static final int CONTACT_REQUEST = 2;
     private static final int PHOTO_REQUEST = 3;
 
+    public Callback mCallback;
+
+
+
+    public interface Callback{
+        void onCrimeUpdate(Crime crime);
+    }
 
     public static CrimeDetailsFragment newInstance(UUID uuid) {
         Bundle bundle = new Bundle();
@@ -99,6 +106,7 @@ public class CrimeDetailsFragment extends Fragment {
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                     crime.setmTitle(s.toString());
                     CrimeLab.get(getActivity()).updateCrime(crime);
+                    mCallback.onCrimeUpdate(crime);
                 }
 
                 @Override
@@ -118,6 +126,7 @@ public class CrimeDetailsFragment extends Fragment {
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                     crime.setmDescription(s.toString());
                     CrimeLab.get(getActivity()).updateCrime(crime);
+                    mCallback.onCrimeUpdate(crime);
                 }
 
                 @Override
@@ -163,6 +172,7 @@ public class CrimeDetailsFragment extends Fragment {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     crime.setmSolved(isChecked);
                     CrimeLab.get(getActivity()).updateCrime(crime);
+                    mCallback.onCrimeUpdate(crime);
                 }
             });
 
@@ -233,6 +243,14 @@ public class CrimeDetailsFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
+        if(MainHolder.isPhone) mCallback = MainHolder.pager;
+        else mCallback = (CrimeDetailsFragment.Callback)context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallback = null;
     }
 
     @Override
@@ -244,6 +262,7 @@ public class CrimeDetailsFragment extends Fragment {
 
             crime.setDate(date);
             CrimeLab.get(getActivity()).updateCrime(crime);
+            mCallback.onCrimeUpdate(crime);
             String date_string = formatter.format(crime.getDate());
             date_button.setText(date_string);
         } else if (resultCode == Activity.RESULT_OK && requestCode == TIME_REQUEST) {
@@ -252,6 +271,7 @@ public class CrimeDetailsFragment extends Fragment {
 
             crime.setDate(date);
             CrimeLab.get(getActivity()).updateCrime(crime);
+            mCallback.onCrimeUpdate(crime);
             String time = formatter.format(crime.getDate());
             time_button.setText(time);
         } else if (resultCode == Activity.RESULT_OK && requestCode == CONTACT_REQUEST) {
@@ -279,6 +299,7 @@ public class CrimeDetailsFragment extends Fragment {
                 c.close();
             }
             CrimeLab.get(getActivity()).updateCrime(crime);
+            mCallback.onCrimeUpdate(crime);
         } else if (resultCode == Activity.RESULT_OK && requestCode == PHOTO_REQUEST) {
             updatePhoto();
         }
@@ -310,4 +331,6 @@ public class CrimeDetailsFragment extends Fragment {
         }
 
     }
+
+
 }
